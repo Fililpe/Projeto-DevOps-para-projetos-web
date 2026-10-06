@@ -1,0 +1,8 @@
+# Base do projeto. Quem precisar de mais uma biblioteca adiciona aqui,
+# sempre com a versao fixa (==).
+fastapi==0.142.2
+uvicorn[standard]==0.54.0
+
+# Testes
+pytest==9.1.1
+httpx==0.28.1
