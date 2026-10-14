@@ -1,10 +1,12 @@
-create database sistema_estoque;
+CREATE DATABASE sistema_estoque;
 
 CREATE TABLE usuarios (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
-    email VARCHAR(255) CHECK (email ~ '^[^@\s]+@[^@\s]+\.[A-Za-z]{2,}$') NOT NULL,
-    senha_hash VARCHAR(255) CHECK (length(senha_hash) > 0)
+    email VARCHAR(255) UNIQUE NOT NULL
+        CHECK (email ~ '^[^@\s]+@[^@\s]+\.[A-Za-z]{2,}$'),
+    senha_hash VARCHAR(255) NOT NULL
+        CHECK (length(senha_hash) > 0)
 );
 
 CREATE TABLE produtos (
