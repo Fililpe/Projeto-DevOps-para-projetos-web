@@ -11,3 +11,8 @@ httpx==0.28.1
 sqlalchemy==2.1.4
 psycopg[binary]==3.3.6
 python-dotenv==1.2.4
+
+# Autenticacao
+bcrypt==5.0.0
+email-validator==2.3.0
+itsdangerous==2.2.0
