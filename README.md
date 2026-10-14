@@ -10,30 +10,58 @@ Sistema web simples de estoque: o usuario se cadastra, faz login e, depois de lo
 
 | Camada | Tecnologia |
 | --- | --- |
-| Backend e API | Python 3.12+ com FastAPI |
+| Backend e API | Python 3.12+ com FastAPI (validado no Python 3.14.7) |
 | Banco de dados | PostgreSQL |
 | Frontend | HTML, CSS e JavaScript |
 | Testes | pytest |
 
-## Como rodar (base atual)
+## Como obter o projeto
 
 ```bash
 git clone https://github.com/Fililpe/Projeto-DevOps-para-projetos-web.git
 cd Projeto-DevOps-para-projetos-web
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-uvicorn backend.main:app --reload
 ```
 
-Abrir http://localhost:8000/api/health. Tem que responder `{"status":"ok"}`.
+## Como instalar as dependencias
 
-TODO (Dados e Backend): passos do banco e do arquivo `.env`.
+As dependencias diretas do projeto possuem versoes fixas no arquivo
+`requirements.txt`.
+
+### Windows PowerShell
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+```
+
+### Linux e macOS
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+```
+
+## Como configurar e executar
+
+1. Copie `.env.example` para `.env`.
+2. Preencha as variaveis do PostgreSQL e defina uma `SECRET_KEY` com pelo
+   menos 32 caracteres.
+3. Crie as tabelas utilizando `backend/db.sql`.
+4. Inicie a API:
+
+```powershell
+python -m uvicorn backend.main:app --reload
+```
+
+Abra http://localhost:8000/api/health. A resposta deve ser
+`{"status":"ok"}`.
 
 ## Testes
 
-```bash
-pytest
+```powershell
+python -m pytest -v
 ```
 
 ## Como contribuir

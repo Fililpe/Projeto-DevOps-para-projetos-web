@@ -1,6 +1,8 @@
 # Base do projeto. Quem precisar de mais uma biblioteca adiciona aqui,
 # sempre com a versao fixa (==).
 fastapi==0.142.2
+pydantic==2.14.1
+starlette==1.8.0
 uvicorn[standard]==0.54.0
 
 # Testes
