@@ -8,6 +8,7 @@ from fastapi import FastAPI
 from starlette.middleware.sessions import SessionMiddleware
 
 from backend.auth import router as auth_router
+from backend.produtos import router as produtos_router
 
 load_dotenv()
 
@@ -35,6 +36,7 @@ app.add_middleware(
 
 # Registra as rotas de autenticacao
 app.include_router(auth_router)
+app.include_router(produtos_router)
 
 
 @app.get("/api/health", tags=["infra"])
