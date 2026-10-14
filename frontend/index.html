@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Estoque - Entrar</title>
+    <link rel="icon" type="image/png" href="img/aponti-simbolo.png" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="auth-pagina">
+    <!-- TOPO -->
+    <header class="topo">
+      <div class="container py-4">
+        <span class="topo-marca">Estoque</span>
+      </div>
+    </header>
+
+    <main class="auth-principal">
+      <section class="auth-cartao" aria-labelledby="tituloLogin">
+        <h1 class="auth-titulo h4 mb-1" id="tituloLogin">Entrar</h1>
+        <p class="text-muted small mb-4">
+          Acesse sua conta para gerenciar o estoque.
+        </p>
+
+        <!-- FORMULÁRIO DE LOGIN -->
+        <form id="formLogin" novalidate>
+          <div class="mb-3 campo-wrapper">
+            <label for="lEmail" class="form-label">E-mail</label>
+            <input
+              type="email"
+              class="form-control"
+              id="lEmail"
+              autocomplete="email"
+              required
+              pattern="[A-Za-z0-9_%+\-]+(?:\.[A-Za-z0-9_%+\-]+)*@[A-Za-z0-9](?:[A-Za-z0-9\-]{0,61}[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9\-]{0,61}[A-Za-z0-9])?)*\.[A-Za-z]{2,}"
+            />
+            <div class="invalid-feedback"></div>
+          </div>
+          <div class="mb-3 campo-wrapper">
+            <label for="lSenha" class="form-label">Senha</label>
+            <input
+              type="password"
+              class="form-control"
+              id="lSenha"
+              autocomplete="current-password"
+              required
+            />
+            <div class="invalid-feedback"></div>
+          </div>
+
+          <p id="erroLogin" class="alert alert-danger small mb-3 d-none">
+            E-mail ou senha incorretos.
+          </p>
+
+          <button type="submit" class="btn btn-primary w-100">Entrar</button>
+        </form>
+
+        <p class="text-center small mt-4 mb-0">
+          Não tem uma conta?
+          <a href="cadastro.html" class="auth-link">Cadastre-se</a>
+        </p>
+      </section>
+    </main>
+
+    <!-- CONTAINER DE TOASTS -->
+    <div
+      class="toast-container position-fixed bottom-0 end-0 p-3"
+      id="toastContainer"
+    ></div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+    <script src="js/toast.js"></script>
+    <script src="js/login.js"></script>
+  </body>
+</html>

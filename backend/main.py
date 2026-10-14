@@ -10,6 +10,11 @@ from starlette.middleware.sessions import SessionMiddleware
 from backend.auth import router as auth_router
 from backend.produtos import router as produtos_router
 
+from pathlib import Path
+from fastapi.staticfiles import StaticFiles
+
+FRONTEND_DIR = Path(__file__).resolve().parent.parent / "frontend"
+
 load_dotenv()
 
 app = FastAPI(
@@ -43,3 +48,10 @@ app.include_router(produtos_router)
 def health():
     """Verifica se a API esta funcionando."""
     return {"status": "ok"}
+
+# Precisa ficar sempre no final do arquivo
+app.mount(
+    "/",
+    StaticFiles(directory=FRONTEND_DIR, html=True),
+    name="frontend"
+)
