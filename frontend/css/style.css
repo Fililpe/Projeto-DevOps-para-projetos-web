@@ -1,0 +1,132 @@
+:root {
+  --cor-primaria-escura: #420f99;
+  --cor-primaria: #6518ea;
+  --cor-primaria-clara: #ad7dff;
+  --cor-destaque: #fbc100;
+  --cor-fundo: #f5f5f5;
+
+  --bs-primary: #6518ea;
+  --bs-primary-rgb: 101, 24, 234;
+}
+
+body {
+  background-color: var(--cor-fundo);
+  font-family:
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+}
+
+.btn-primary {
+  --bs-btn-bg: #6518ea;
+  --bs-btn-border-color: #6518ea;
+  --bs-btn-hover-bg: #420f99;
+  --bs-btn-hover-border-color: #420f99;
+  --bs-btn-active-bg: #420f99;
+  --bs-btn-active-border-color: #420f99;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--cor-primaria-clara);
+  box-shadow: 0 0 0 0.25rem rgba(173, 125, 255, 0.35);
+}
+
+.dropdown-menu {
+  --bs-dropdown-link-hover-bg: #e9ecef;
+  --bs-dropdown-link-active-bg: #6518ea;
+  --bs-dropdown-link-active-color: var(--cor-fundo);
+}
+
+/* TOPO */
+.topo {
+  background-color: var(--cor-primaria-escura);
+  color: #fff;
+}
+
+.topo-marca {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+/* CARTÃO DO RESUMO */
+.cartao {
+  background-color: #ad7dff1a;
+  border-left: 4px solid var(--cor-primaria);
+  border-radius: 0.5rem;
+  padding: 1rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.cartao-rotulo {
+  font-size: 0.85rem;
+  color: #5b5b66;
+}
+
+.cartao strong {
+  font-size: 1.6rem;
+  color: var(--cor-primaria-escura);
+}
+
+.cartao-alerta {
+  border-left-color: var(--cor-destaque);
+}
+
+/* TABELA */
+.tabela {
+  background: #fff;
+  border-radius: 0.5rem;
+}
+
+.tabela thead th {
+  color: var(--cor-primaria-escura);
+  font-weight: 600;
+  border-bottom-width: 2px;
+}
+
+/* PÁGINAS DE LOGIN E CADASTRO */
+.auth-pagina {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-principal {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.auth-cartao {
+  width: 100%;
+  max-width: 420px;
+  background: #fff;
+  border-radius: 0.5rem;
+  border-top: 4px solid var(--cor-primaria);
+  padding: 2rem 1.75rem;
+  box-shadow: 0 0.25rem 1rem rgba(66, 15, 153, 0.08);
+}
+
+.auth-titulo {
+  color: var(--cor-primaria-escura);
+  font-weight: 600;
+}
+
+.auth-link {
+  color: var(--cor-primaria);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-link:hover,
+.auth-link:focus {
+  color: var(--cor-primaria-escura);
+  text-decoration: underline;
+}
