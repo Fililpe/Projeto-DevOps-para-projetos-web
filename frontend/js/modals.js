@@ -136,7 +136,7 @@ function configuraModalEditProduto() {
     submitBtn.disabled = true;
 
     try {
-      const resposta = await fetch(`/api/produtos/${produtoId}`, {
+      const resposta = await fetch(`/api/produtos/${produtoId.value}`, {
         method: "PUT",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
