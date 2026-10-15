@@ -136,3 +136,53 @@ def test_paginacao_rejeita_valores_fora_do_limite():
 
     assert pagina_invalida.status_code == 422
     assert limite_invalido.status_code == 422
+
+
+def test_editar_e_excluir_produto():
+    with TestClient(app) as cliente:
+        autenticar_usuario(cliente)
+
+        criado = cliente.post(
+            "/api/produtos",
+            json={"nome": "Produto original", "preco": "10.00", "quantidade": 1},
+        )
+        produto_id = criado.json()["id"]
+
+        # O frontend envia preco e quantidade como texto
+        editado = cliente.put(
+            f"/api/produtos/{produto_id}",
+            json={
+                "nome": "Produto editado",
+                "descricao": "",
+                "preco": "15.50",
+                "quantidade": "4",
+            },
+        )
+        assert editado.status_code == 200
+        assert editado.json()["nome"] == "Produto editado"
+        assert editado.json()["quantidade"] == 4
+        assert editado.json()["descricao"] is None
+
+        excluido = cliente.delete(f"/api/produtos/{produto_id}")
+        assert excluido.status_code == 204
+
+        de_novo = cliente.delete(f"/api/produtos/{produto_id}")
+        assert de_novo.status_code == 404
+
+        inexistente = cliente.put(
+            f"/api/produtos/{produto_id}",
+            json={"nome": "X", "preco": "1.00", "quantidade": 1},
+        )
+        assert inexistente.status_code == 404
+
+
+def test_editar_e_excluir_exigem_autenticacao():
+    with TestClient(app) as cliente:
+        editar = cliente.put(
+            "/api/produtos/1",
+            json={"nome": "X", "preco": "1.00", "quantidade": 1},
+        )
+        excluir = cliente.delete("/api/produtos/1")
+
+    assert editar.status_code == 401
+    assert excluir.status_code == 401

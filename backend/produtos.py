@@ -2,7 +2,7 @@
 
 from decimal import Decimal
 
-from fastapi import APIRouter, Depends, Query, status
+from fastapi import APIRouter, Depends, HTTPException, Query, status
 from pydantic import BaseModel, Field, field_validator
 from sqlalchemy import text
 
@@ -95,3 +95,58 @@ def listar_produtos(
         ).mappings().all()
 
     return [dict(produto) for produto in resultados]
+
+
+@router.put("/{produto_id}", response_model=ProdutoResposta)
+def editar_produto(
+    produto_id: int,
+    produto: ProdutoCadastro,
+    _usuario_id: int = Depends(exigir_usuario_autenticado),
+):
+    """Atualiza todos os campos de um produto existente."""
+    with engine.begin() as conexao:
+        resultado = conexao.execute(
+            text("""
+                UPDATE produtos
+                SET nome = :nome,
+                    descricao = :descricao,
+                    preco = :preco,
+                    quantidade = :quantidade
+                WHERE id = :id
+                RETURNING id, nome, descricao, preco, quantidade
+            """),
+            {
+                "id": produto_id,
+                "nome": produto.nome,
+                "descricao": produto.descricao,
+                "preco": produto.preco,
+                "quantidade": produto.quantidade,
+            },
+        ).mappings().first()
+
+    if resultado is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Produto nao encontrado",
+        )
+
+    return dict(resultado)
+
+
+@router.delete("/{produto_id}", status_code=status.HTTP_204_NO_CONTENT)
+def excluir_produto(
+    produto_id: int,
+    _usuario_id: int = Depends(exigir_usuario_autenticado),
+):
+    """Remove um produto do estoque."""
+    with engine.begin() as conexao:
+        resultado = conexao.execute(
+            text("DELETE FROM produtos WHERE id = :id RETURNING id"),
+            {"id": produto_id},
+        ).first()
+
+    if resultado is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Produto nao encontrado",
+        )
